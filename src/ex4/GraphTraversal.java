@@ -60,52 +60,52 @@ public class GraphTraversal {
                     break;
                 //D
                 case 3:
-                    table1[i].add(map.get("A"));
-                    table1[i].add(map.get("B"));
-                    table1[i].add(map.get("E"));
                     table1[i].add(map.get("G"));
+                    table1[i].add(map.get("A"));
+                    table1[i].add(map.get("E"));
+                    table1[i].add(map.get("B"));
                     break;
                 //E
                 case 4:
-                    table1[i].add(map.get("B"));
                     table1[i].add(map.get("C"));
-                    table1[i].add(map.get("D"));
                     table1[i].add(map.get("F"));
-                    table1[i].add(map.get("G"));
+                    table1[i].add(map.get("D"));
+                    table1[i].add(map.get("B"));
                     table1[i].add(map.get("H"));
+                    table1[i].add(map.get("G"));
                     break;
                 //F
                 case 5:
-                    table1[i].add(map.get("C"));
                     table1[i].add(map.get("E"));
                     table1[i].add(map.get("H"));
+                    table1[i].add(map.get("C"));
                     break;
                 //G
                 case 6:
-                    table1[i].add(map.get("D"));
-                    table1[i].add(map.get("E"));
                     table1[i].add(map.get("H"));
-                    table1[i].add(map.get("I"));
+                    table1[i].add(map.get("E"));
+                    table1[i].add(map.get("D"));
                     table1[i].add(map.get("J"));
+                    table1[i].add(map.get("I"));
                     break;
                 //H
                 case 7:
-                    table1[i].add(map.get("E"));
                     table1[i].add(map.get("F"));
-                    table1[i].add(map.get("G"));
+                    table1[i].add(map.get("E"));
                     table1[i].add(map.get("J"));
+                    table1[i].add(map.get("G"));
                     break;
                 //I
                 case 8:
+                    table1[i].add(map.get("J"));
                     table1[i].add(map.get("A"));
                     table1[i].add(map.get("G"));
-                    table1[i].add(map.get("J"));
                     break;
                 //J
                 case 9:
-                    table1[i].add(map.get("G"));
                     table1[i].add(map.get("H"));
                     table1[i].add(map.get("I"));
+                    table1[i].add(map.get("G"));
                     break;
                 default:
                     break;

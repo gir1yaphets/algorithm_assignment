@@ -1,9 +1,5 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
@@ -16,9 +12,11 @@ import ex4.GraphTraversal;
 
 public class Solution {
 
-    private static final String PATTERN = "[\\sa-zA-Z0-9_.-]+";
-    private static final String FILE_PATH_1 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise/pride-and-prejudice.txt";
-    private static final String FILE_PATH_2 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise/words-shuffled.txt";
+    private static final String PATTERN = "[a-zA-Z0-9]+";
+    private static final String FILE_PATH_1 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise" +
+            "/pride-and-prejudice.txt";
+    private static final String FILE_PATH_2 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise" +
+            "/words-shuffled.txt";
 
     private LinkedListSet linkedListSet;
     private BinaryTreeSet binaryTreeSet;
@@ -27,6 +25,8 @@ public class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
         solution.executeEx1();
+//        FindMedium findMedium = new FindMedium();
+//        findMedium.findMedian(new int[]{4, 6, 2, 4, 3, 1});
     }
 
     enum SetType {
@@ -36,20 +36,20 @@ public class Solution {
     }
 
     private void executeEx1() {
-        String content = readFile1();
+        String content = readFile(FILE_PATH_1);
+        String words = readFile(FILE_PATH_2);
 
         int linkedSize = insert(content, SetType.LINKED_LIST_SET);
-        int linkedMiss = query(SetType.LINKED_LIST_SET);
+        int linkedMiss = query(words, SetType.LINKED_LIST_SET);
 
-        System.out.println("linkedSize = " + linkedSize + " linkedMiss = " + linkedMiss);
+        int treeSize = insert(content, SetType.BINARY_TREE_SET);
+        int treeMiss = query(words, SetType.BINARY_TREE_SET);
 
-//        int treeSize = insert(content, SetType.BINARY_TREE_SET);
-//        int treeMiss = query(SetType.BINARY_TREE_SET);
-//
-//        int hashSize = insert(content, SetType.HASH_TABLE_SET);
-//        int hashMiss = query(SetType.HASH_TABLE_SET);
-//
-//        System.out.println("linkedSize = " + linkedSize + " linkedMiss = " + linkedMiss + " treeSize = " + treeSize + " treeMiss = " + treeMiss + " hashSize = " + hashSize + " hashMiss = " + hashMiss);
+        int hashSize = insert(content, SetType.HASH_TABLE_SET);
+        int hashMiss = query(words, SetType.HASH_TABLE_SET);
+
+        System.out.println("linkedSize = " + linkedSize + " linkedMiss = " + linkedMiss + " treeSize = " + treeSize
+                + " treeMiss = " + treeMiss + " hashSize = " + hashSize + " hashMiss = " + hashMiss);
     }
 
     private void executeEx2() {
@@ -70,12 +70,7 @@ public class Solution {
     }
 
     private int insert(String content, SetType type) {
-        String after = content.replaceAll("\\s+", " ");
-
-        String[] words = after.split(" ");
-        for (String word : words) {
-            System.out.println(word);
-        }
+        String[] words = content.replaceAll("\\s+", " ").split(" ");
         int size = 0;
         switch (type) {
             case LINKED_LIST_SET:
@@ -106,29 +101,28 @@ public class Solution {
         return size;
     }
 
-    private int query(SetType type) {
-        String content = readFile2();
-        String[] words = content.split(" ");
+    private int query(String words, SetType type) {
+        String[] after = words.replaceAll("\\s+", " ").split(" ");
 
         int count = 0;
 
         switch (type) {
             case LINKED_LIST_SET:
-                for (String word : words) {
+                for (String word : after) {
                     if (!linkedListSet.contains(word)) {
                         count++;
                     }
                 }
                 break;
             case BINARY_TREE_SET:
-                for (String word : words) {
+                for (String word : after) {
                     if (!binaryTreeSet.contains(word)) {
                         count++;
                     }
                 }
                 break;
             case HASH_TABLE_SET:
-                for (String word : words) {
+                for (String word : after) {
                     if (!hashTableSet.contains(word)) {
                         count++;
                     }
@@ -141,69 +135,20 @@ public class Solution {
         return count;
     }
 
-    private String readFile2() {
+    private String readFile(String path) {
         StringBuilder stringBuilder = new StringBuilder();
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader(FILE_PATH_2);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        if (fileReader == null) {
-            return "";
-        }
-
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-        String line = null;
-        try {
-            line = bufferedReader.readLine();
-            stringBuilder.append(line);
-            stringBuilder.append(" ");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        while (line != null) {
-            try {
-                line = bufferedReader.readLine();
-                stringBuilder.append(line);
-                stringBuilder.append(" ");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        try {
-            bufferedReader.close();
-            fileReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return stringBuilder.toString();
-    }
-
-    private String readFile1() {
-        StringBuilder stringBuilder = new StringBuilder();
-        File file = new File(FILE_PATH_1);
+        File file = new File(path);
         Reader reader;
         try {
             reader = new InputStreamReader(new FileInputStream(file));
             int tempchar;
             while ((tempchar = reader.read()) != -1) {
-                if (((char) tempchar) != '\r'
-                        && ((char)tempchar + "").matches(PATTERN)) {
-                    switch ((char)tempchar) {
-                        case '\n':
-                        case '.':
-                        case '-':
-                            tempchar = ' ';
-                            break;
-                    }
-                    stringBuilder.append((char)tempchar);
+                if (!((char) tempchar + "").matches(PATTERN)) {
+                    tempchar = ' ';
                 }
+
+                stringBuilder.append((char) tempchar);
+
             }
             reader.close();
         } catch (Exception e) {
