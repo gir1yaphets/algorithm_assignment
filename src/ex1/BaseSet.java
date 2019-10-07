@@ -57,10 +57,10 @@ public abstract class BaseSet {
         long start, end;
 
         for (String word : words) {
-            start = System.currentTimeMillis();
+            start = System.nanoTime();
             add(word);
-            end = System.currentTimeMillis();
-//            System.out.println(end - start);
+            end = System.nanoTime();
+            System.out.println(end - start);
         }
 
         size = size();

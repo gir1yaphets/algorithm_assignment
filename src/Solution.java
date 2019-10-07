@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 import ex1.BaseSet;
@@ -17,8 +18,8 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.executeEx1();
-//        solution.executeEx2();
+//        solution.executeEx1();
+        solution.executeEx2();
     }
 
     private void executeEx1() {
@@ -41,8 +42,11 @@ public class Solution {
         for (int i = HEAP_SORT.value(); i <= SELECTION_SORT.value(); i++ ) {
             BaseSortingHelper sortHelper = BaseSortingHelper.newInstance(BaseSortingHelper.SortType.valueOf(i));
 
+            //use a new array to sort
+            String[] wordsForSort = Arrays.copyOf(words, words.length);
+
             long startTime = System.currentTimeMillis();
-            sortHelper.sort(words);
+            sortHelper.sort(wordsForSort);
             long endTime = System.currentTimeMillis();
 
             long duration = endTime - startTime;
