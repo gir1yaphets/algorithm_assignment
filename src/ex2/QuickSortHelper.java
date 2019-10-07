@@ -11,7 +11,8 @@ public class QuickSortHelper extends BaseSortingHelper {
         if (start >= end) return;
 
         int lo = start, hi = end;
-        String pivot = array[lo];
+        int ran = lo + (int)((hi - lo + 1)*Math.random());
+        String pivot = array[ran];
 
         while (lo < hi) {
             while (lo < hi && isFormerBiggerThanLatter(array[hi], pivot)) {

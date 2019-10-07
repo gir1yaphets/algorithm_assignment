@@ -7,8 +7,12 @@ import java.util.List;
 import ex1.BinaryTreeSet;
 import ex1.HashTableSet;
 import ex1.LinkedListSet;
+import ex2.BaseSortingHelper;
 import ex3.GraphHelper;
 import ex4.GraphTraversal;
+
+import static ex2.BaseSortingHelper.SortType.HEAP_SORT;
+import static ex2.BaseSortingHelper.SortType.SELECTION_SORT;
 
 public class Solution {
 
@@ -24,9 +28,8 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.executeEx1();
-//        FindMedium findMedium = new FindMedium();
-//        findMedium.findMedian(new int[]{4, 6, 2, 4, 3, 1});
+//        solution.executeEx1();
+        solution.executeEx2();
     }
 
     enum SetType {
@@ -35,9 +38,15 @@ public class Solution {
         HASH_TABLE_SET
     }
 
+    private String[] parseFile(String path) {
+        String content = readFile(path);
+        String[] words = content.replaceAll("\\s+", " ").split(" ");
+        return words;
+    }
+
     private void executeEx1() {
-        String content = readFile(FILE_PATH_1);
-        String words = readFile(FILE_PATH_2);
+        String[] content = parseFile(FILE_PATH_1);
+        String[] words = parseFile(FILE_PATH_2);
 
         int linkedSize = insert(content, SetType.LINKED_LIST_SET);
         int linkedMiss = query(words, SetType.LINKED_LIST_SET);
@@ -53,6 +62,22 @@ public class Solution {
     }
 
     private void executeEx2() {
+        String[] words = parseFile(FILE_PATH_1);
+
+        for (int i = HEAP_SORT.value(); i <= SELECTION_SORT.value(); i++ ) {
+//            if (i == 1) {
+                BaseSortingHelper sortHelper = BaseSortingHelper.newInstance(BaseSortingHelper.SortType.valueOf(i));
+
+                long startTime = System.currentTimeMillis();
+                sortHelper.sort(words);
+                long endTime = System.currentTimeMillis();
+
+                long duration = endTime - startTime;
+
+                System.out.println("The duration of " + BaseSortingHelper.SortType.valueOf(i).name() + " is " + duration);
+
+//            }
+        }
 
     }
 
@@ -69,28 +94,37 @@ public class Solution {
         graphTraversal.bfs();
     }
 
-    private int insert(String content, SetType type) {
-        String[] words = content.replaceAll("\\s+", " ").split(" ");
+    private int insert(String[] words, SetType type) {
         int size = 0;
+        long start, end = 0;
         switch (type) {
             case LINKED_LIST_SET:
                 linkedListSet = new LinkedListSet();
                 for (String word : words) {
+                    start = System.currentTimeMillis();
                     linkedListSet.add(word);
+                    end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
                 size = linkedListSet.size();
                 break;
             case BINARY_TREE_SET:
                 binaryTreeSet = new BinaryTreeSet();
                 for (String word : words) {
+                    start = System.currentTimeMillis();
                     binaryTreeSet.add(word);
+                    end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
                 size = binaryTreeSet.size();
                 break;
             case HASH_TABLE_SET:
                 hashTableSet = new HashTableSet();
                 for (String word : words) {
+                    start = System.currentTimeMillis();
                     hashTableSet.add(word);
+                    end = System.currentTimeMillis();
+                    System.out.println(end - start);
                 }
                 size = hashTableSet.size();
                 break;
@@ -101,28 +135,26 @@ public class Solution {
         return size;
     }
 
-    private int query(String words, SetType type) {
-        String[] after = words.replaceAll("\\s+", " ").split(" ");
-
+    private int query(String[] words, SetType type) {
         int count = 0;
 
         switch (type) {
             case LINKED_LIST_SET:
-                for (String word : after) {
+                for (String word : words) {
                     if (!linkedListSet.contains(word)) {
                         count++;
                     }
                 }
                 break;
             case BINARY_TREE_SET:
-                for (String word : after) {
+                for (String word : words) {
                     if (!binaryTreeSet.contains(word)) {
                         count++;
                     }
                 }
                 break;
             case HASH_TABLE_SET:
-                for (String word : after) {
+                for (String word : words) {
                     if (!hashTableSet.contains(word)) {
                         count++;
                     }

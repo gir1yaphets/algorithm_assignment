@@ -22,7 +22,7 @@ public class MergeSortHelper extends BaseSortingHelper {
         int t = 0;
 
         while (left <= mid && right <= end) {
-            if (isFormerBiggerThanLatter(array[left], array[right])) {
+            if (isFormerLessThanLatter(array[left], array[right])) {
                 temp[t++] = array[left++];
             } else {
                 temp[t++] = array[right++];

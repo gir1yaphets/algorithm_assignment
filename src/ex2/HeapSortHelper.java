@@ -3,36 +3,46 @@ package ex2;
 public class HeapSortHelper extends BaseSortingHelper {
     @Override
     public void sort(String[] array) {
+        heapSort(array);
+    }
+
+    public void heapSort(String[] array) {
+        if (array == null || array.length == 1) return;
         buildArray2Heap(array);
+
+        for (int i = array.length - 1; i >= 1; i--) {
+            swap(array, 0, i);
+            buildMaxHeap(array, i, 0);
+        }
     }
 
     private void buildArray2Heap(String[] array) {
         if (array == null || array.length == 0) return;
 
-        int mid = array.length >> 1;
+        int mid = (array.length - 1) >> 1;
         for (int i = mid; i >= 0; i--) {
-            buildMinHeap(array, 0);
+            buildMaxHeap(array, array.length, i);
         }
     }
 
-    private void buildMinHeap(String[] array, int start) {
-        int minIndex = start;
+    private void buildMaxHeap(String[] array, int heapSize, int start) {
+        int maxIndex = start;
         int left = 2 * start + 1;
         int right = 2 * start + 2;
 
-        if (left < array.length && isFormerBiggerThanLatter(array[minIndex], array[left])) {
-            minIndex = left;
+        //left > min
+        if (left < heapSize && isFormerBiggerThanLatter(array[left], array[maxIndex])) {
+            maxIndex = left;
         }
 
-        if (right < array.length && isFormerLessThanLatter(array[minIndex], array[right])) {
-            minIndex = right;
+        //right > min
+        if (right < heapSize && isFormerBiggerThanLatter(array[right], array[maxIndex])) {
+            maxIndex = right;
         }
 
-        if (minIndex != start) {
-            String temp = array[minIndex];
-            array[minIndex] = array[start];
-            array[start] = temp;
-            buildMinHeap(array, minIndex);
+        if (maxIndex != start) {
+            swap(array, maxIndex, start);
+            buildMaxHeap(array, heapSize, maxIndex);
         }
 
     }

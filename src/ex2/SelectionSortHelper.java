@@ -10,15 +10,13 @@ public class SelectionSortHelper extends BaseSortingHelper {
     {
         for (int i = 0; i < array.length - 1; i++) {
             int min = i;
-            for (int j = i; j < array.length; j++) {
+            for (int j = i + 1; j < array.length; j++) {
                 if (isFormerLessThanLatter(array[j], array[min])) {
                     min = j;
                 }
 
                 //swap
-                String temp = array[j];
-                array[j] = array[min];
-                array[min] = temp;
+                swap(array, i, min);
             }
         }
     }

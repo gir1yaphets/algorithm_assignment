@@ -36,9 +36,6 @@ public class HashTableSet extends BaseSet {
             ListNode curr = array[index];
 
             while (curr.next != null) {
-                if (curr.val.equals(s)) {
-                    return false;
-                }
                 curr = curr.next;
             }
 
