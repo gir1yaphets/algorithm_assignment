@@ -3,6 +3,8 @@ package ex2;
 public class InsertionSortHelper extends BaseSortingHelper {
     @Override
     public void sort(String[] array) {
+        if (array == null || array.length == 0) return;
+
         insertionSort(array);
     }
 

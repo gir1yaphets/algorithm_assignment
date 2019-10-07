@@ -21,7 +21,7 @@ public class HashTableSet extends BaseSet {
 
     @Override
     public boolean add(String s) {
-        if (s == null) throw new IllegalArgumentException("Add Invalid string in HashTableSet");
+        if (s == null) return false;
 
         if (contains(s)) {
             return false;

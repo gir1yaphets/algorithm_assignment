@@ -3,6 +3,8 @@ package ex2;
 public class MergeSortHelper extends BaseSortingHelper {
     @Override
     public void sort(String[] array) {
+        if (array == null || array.length == 0) return;
+
         String[] temp = new String[array.length];
         mergeSort(array, 0, array.length - 1, temp);
     }

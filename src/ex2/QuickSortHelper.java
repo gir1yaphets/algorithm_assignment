@@ -4,6 +4,8 @@ public class QuickSortHelper extends BaseSortingHelper {
 
     @Override
     public void sort(String[] array) {
+        if (array == null || array.length == 0) return;
+
         quickSort(array, 0, array.length - 1);
     }
 
