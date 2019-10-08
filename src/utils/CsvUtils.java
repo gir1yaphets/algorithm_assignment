@@ -1,70 +1,31 @@
 package utils;
 
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
-import java.io.Writer;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import de.siegmar.fastcsv.writer.CsvWriter;
 
 public class CsvUtils {
 
     public static final String EXPORT_CSV_PATH = "/Users/pengxiaolve/Desktop/set.csv";
-    private static final char DEFAULT_SEPARATOR = ',';
-
-    public static void writeLine(Writer w, List<String> values) throws IOException {
-        writeLine(w, values, DEFAULT_SEPARATOR, ' ');
-    }
-
-    public static void writeLine(Writer w, List<String> values, char separators) throws IOException {
-        writeLine(w, values, separators, ' ');
-    }
-
-    private static String followCVSformat(String value) {
-
-        String result = value;
-        if (result.contains("\"")) {
-            result = result.replace("\"", "\"\"");
-        }
-        return result;
-
-    }
-
-    public static void writeLine(Writer w, List<String> values, char separators, char customQuote) throws IOException {
-
-        boolean first = true;
-
-        if (separators == ' ') {
-            separators = DEFAULT_SEPARATOR;
-        }
-
-        StringBuilder sb = new StringBuilder();
-        for (String value : values) {
-            if (!first) {
-                sb.append(separators);
-            }
-            if (customQuote == ' ') {
-                sb.append(followCVSformat(value));
-            } else {
-                sb.append(customQuote).append(followCVSformat(value)).append(customQuote);
-            }
-
-            first = false;
-        }
-        sb.append("\n");
-        w.append(sb.toString());
-    }
 
 
-    public static void log(List<List<String >> data) {
-        FileWriter writer;
+    public static void print(List<List<String >> data) {
+        File file = new File(EXPORT_CSV_PATH);
+        CsvWriter csvWriter = new CsvWriter();
+
         try {
-            writer = new FileWriter(EXPORT_CSV_PATH);
+            Collection<String[]> result = new ArrayList<>();
 
-            for (List line : data) {
-                writeLine(writer, line);
+            for (List<String> line : data) {
+                result.add(new String[]{line.get(0), line.get(1)});
             }
 
-            writer.flush();
-            writer.close();
+            csvWriter.write(file, StandardCharsets.UTF_8, result);
         } catch (IOException e) {
             e.printStackTrace();
         }

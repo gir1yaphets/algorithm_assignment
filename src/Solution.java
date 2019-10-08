@@ -30,11 +30,13 @@ public class Solution {
 
         for (int i = LINKED_LIST_SET.value(); i <= HASH_TABLE_SET.value(); i++) {
             BaseSet set = BaseSet.newInstance(BaseSet.SetType.valueOf(i));
-            int size = set.insert(content);
-            int miss = set.query(words);
+            if (i == 2) {
+                int size = set.insert(content);
+                int miss = set.query(words);
 
-            System.out.println("Total size in " + BaseSet.SetType.valueOf(i).name() + " is " + size);
-            System.out.println("Missing number in " + BaseSet.SetType.valueOf(i).name() + " is " + miss + "\n");
+                System.out.println("Total size in " + BaseSet.SetType.valueOf(i).name() + " is " + size);
+                System.out.println("Missing number in " + BaseSet.SetType.valueOf(i).name() + " is " + miss + "\n");
+            }
         }
     }
 

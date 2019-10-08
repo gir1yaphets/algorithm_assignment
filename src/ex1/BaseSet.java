@@ -75,7 +75,7 @@ public abstract class BaseSet {
             }
         }
 
-        CsvUtils.log(data);
+        CsvUtils.print(data);
         size = size();
 
         return size;

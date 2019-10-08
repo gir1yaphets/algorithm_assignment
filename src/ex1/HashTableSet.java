@@ -13,7 +13,7 @@ public class HashTableSet extends BaseSet {
         }
     }
 
-    private static final int MOD = 200;
+    private static final int MOD = 300;
 
     public HashTableSet() {
         array = new ListNode[MOD];
