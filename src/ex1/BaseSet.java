@@ -1,5 +1,10 @@
 package ex1;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import utils.CsvUtils;
+
 public abstract class BaseSet {
     protected int size = 0;
 
@@ -56,16 +61,32 @@ public abstract class BaseSet {
         int size;
         long start, end;
 
+        List<List<String>> data = new ArrayList<>();
+
         for (String word : words) {
             start = System.nanoTime();
-            add(word);
+            boolean result = add(word);
             end = System.nanoTime();
-            System.out.println(end - start);
+
+            long duration = end - start;
+
+            if (result) {
+                data.add(makeData(size(), duration));
+            }
         }
 
+        CsvUtils.log(data);
         size = size();
 
         return size;
+    }
+
+    private List<String> makeData(int size, long duration) {
+        List<String> line = new ArrayList<>();
+        line.add(String.valueOf(size));
+        line.add(String.valueOf(duration));
+
+        return line;
     }
 
     public int query(String[] words) {

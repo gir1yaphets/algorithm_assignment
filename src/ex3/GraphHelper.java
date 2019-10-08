@@ -16,14 +16,30 @@ public class GraphHelper {
             {0,0,1,1,1,0}
     };
 
-    public List[] table2matrix(int[][] graph, int n) {
-        List<Integer>[] v = new List[n];
+    public int[][] matrix =
+            {       {0, 0, 0, 0, 0, 1},
+                    {0, 0, 1, 0, 0, 0},
+                    {0, 1, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0},
+                    {0, 0, 0, 0, 0, 0},
+                    {1, 0, 0, 0, 0, 0}};
+
+    /**
+     * Convert from an adjacency matrix to adjacency lists
+     * @param graph
+     * @return
+     * Time complexity: O(n^2)
+     */
+    public List[] table2matrix(int[][] graph) {
+        if (graph == null) return null;
+
+        List<Integer>[] v = new List[graph.length];
 
         for (int i = 0; i < graph.length; i++) {
             for (int j = 0 ; j < graph.length; j++) {
                 if (graph[i][j] == 1) {
                     if (v[i] == null) {
-                        v[i] = new ArrayList();
+                        v[i] = new ArrayList<>();
                     }
                     v[i].add(j);
                 }
@@ -33,11 +49,32 @@ public class GraphHelper {
         return v;
     }
 
-    public int[][] table2inmatrix(List<Integer>[] graph, int n, int m) {
+    /**
+     * Convert from an adjacency list to an incidence matrix
+     * @param graph
+     * @return
+     * Time complexity: O(m+n)
+     * n is the number of vertex and m is the number of edges
+     */
+    public int[][] table2inmatrix(List<Integer>[] graph) {
+        if (graph == null) return null;
+
+        int adjVertex = 0;
+        for (List adjList : graph) {
+            if (adjList != null) {
+                adjVertex += adjList.size();
+            }
+        }
+
+        int m = adjVertex >> 1;
+        int n = graph.length;
+
         int[][] res = new int[n][m];
         int index = 0;
         Set<String> edgeSet = new HashSet<>();
         for (int i = 0; i < graph.length; i++) {
+            if (graph[i] == null) continue;
+
             for (int j = 0; j < graph[i].size(); j++) {
                 int v = graph[i].get(j);
                 String edge = i + "" + v;
@@ -54,7 +91,18 @@ public class GraphHelper {
         return res;
     }
 
-    public List<Integer>[] inmatrix2table(int[][] matrix, int n, int m) {
+    /**
+     * Convert from an incidence matrix to adjacency lists
+     * @param matrix
+     * @return
+     * Time complexity: O(m*n)
+     * n is the number of vertex and m is the number of edges
+     */
+    public List<Integer>[] inmatrix2table(int[][] matrix) {
+        if (matrix == null) return null;
+
+        int n = matrix.length, m = matrix[0].length;
+
         List<Integer>[] res = new ArrayList[n];
         int cnt = 0;
         List<Integer> edge = new ArrayList<>();

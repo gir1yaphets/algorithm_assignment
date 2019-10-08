@@ -18,8 +18,10 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-//        solution.executeEx1();
-        solution.executeEx2();
+        solution.executeEx1();
+//        solution.executeEx2();
+//        solution.executeEx3();
+//        solution.executeEx4();
     }
 
     private void executeEx1() {
@@ -58,9 +60,9 @@ public class Solution {
 
     private void executeEx3() {
         GraphHelper graphHelper = new GraphHelper();
-        List<Integer>[] table = graphHelper.table2matrix(graphHelper.ajMatrix, 6);
-        int[][] res = graphHelper.table2inmatrix(table, 6, 9);
-        List<Integer>[] tableRes = graphHelper.inmatrix2table(res, 6, 9);
+        List<Integer>[] table = graphHelper.table2matrix(graphHelper.matrix);
+        int[][] res = graphHelper.table2inmatrix(table);
+        List<Integer>[] tableRes = graphHelper.inmatrix2table(res);
     }
 
     private void executeEx4() {
