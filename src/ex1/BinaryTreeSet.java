@@ -29,10 +29,6 @@ public class BinaryTreeSet extends BaseSet {
         if (root == null) {
             root = new TreeNode(s);
         } else {
-//            TreeNode node = new TreeNode(s);
-//            node.left = root;
-//            root = node;
-
             insertNode(s);
         }
 
@@ -61,16 +57,6 @@ public class BinaryTreeSet extends BaseSet {
 
     @Override
     public boolean contains(String s) {
-//        TreeNode curr = root;
-//
-//        while (curr != null) {
-//            if (curr.val.equals(s)) {
-//                return true;
-//            }
-//
-//            curr = curr.left;
-//        }
-//        return false;
         if (s == null || root == null) return false;
 
         return search(s, root);

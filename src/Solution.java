@@ -5,6 +5,7 @@ import ex1.BaseSet;
 import ex2.BaseSortingHelper;
 import ex3.GraphHelper;
 import ex4.GraphTraversal;
+import utils.CsvUtils;
 import utils.FileUtils;
 
 import static ex1.BaseSet.SetType.HASH_TABLE_SET;
@@ -18,8 +19,8 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.executeEx1();
-//        solution.executeEx2();
+//        solution.executeEx1();
+        solution.executeEx2();
 //        solution.executeEx3();
 //        solution.executeEx4();
     }
@@ -30,7 +31,7 @@ public class Solution {
 
         for (int i = LINKED_LIST_SET.value(); i <= HASH_TABLE_SET.value(); i++) {
             BaseSet set = BaseSet.newInstance(BaseSet.SetType.valueOf(i));
-            if (i == 2) {
+            if (i == 1) {
                 int size = set.insert(content);
                 int miss = set.query(words);
 

@@ -70,6 +70,7 @@ public abstract class BaseSet {
 
             long duration = end - start;
 
+            //make data for export
             if (result) {
                 data.add(makeData(size(), duration));
             }
