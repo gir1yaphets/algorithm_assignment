@@ -1,8 +1,5 @@
 package ex1;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 public class BinaryTreeSet extends BaseSet {
     class TreeNode {
         String val;
@@ -29,30 +26,24 @@ public class BinaryTreeSet extends BaseSet {
         if (root == null) {
             root = new TreeNode(s);
         } else {
-            insertNode(s);
+            insertNode(root, s);
         }
 
         return true;
     }
 
-    private void insertNode(String s) {
-        Queue<TreeNode> queue = new LinkedList<>();
-
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            TreeNode node = queue.poll();
-            if (node.left == null) {
-                node.left = new TreeNode(s);
-                return;
-            } else if (node.right == null) {
-                node.right = new TreeNode(s);
-                return;
-            } else {
-                queue.offer(node.left);
-                queue.offer(node.right);
-            }
+    private TreeNode insertNode(TreeNode node, String s) {
+        if (node == null) {
+            return new TreeNode(s);
         }
+
+        if (node.val.compareTo(s) > 0) {
+            node.left = insertNode(node.left, s);
+        } else {
+            node.right = insertNode(node.right, s);
+        }
+
+        return node;
     }
 
     @Override
@@ -67,7 +58,15 @@ public class BinaryTreeSet extends BaseSet {
 
         if (node.val.equals(s)) return true;
 
-        return search(s, node.left) || search(s, node.right);
+        boolean left = false, right = false;
+
+        if (s.compareTo(node.val) > 0) {
+            right = search(s, node.right);
+        } else {
+            left = search(s, node.left);
+        }
+
+        return left || right;
     }
 
     @Override
