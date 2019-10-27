@@ -77,13 +77,13 @@ public class GraphHelper {
 
             for (int j = 0; j < graph[i].size(); j++) {
                 int v = graph[i].get(j);
-                String edge = i + "" + v;
+                String edge = i + "-" + v;
                 if (!edgeSet.contains(edge)) {
                     res[i][index] = 1;
                     res[v][index] = 1;
                     index++;
                     edgeSet.add(edge);
-                    edgeSet.add(v + "" + i);
+                    edgeSet.add(v + "-" + i);
                 }
             }
         }
