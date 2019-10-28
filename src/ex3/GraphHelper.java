@@ -7,6 +7,9 @@ import java.util.Set;
 
 public class GraphHelper {
 
+    /**
+     * Test data 1
+     */
     public int[][] ajMatrix = new int[][]{
             {0,1,1,1,1,0},
             {1,0,0,0,1,0},
@@ -16,6 +19,9 @@ public class GraphHelper {
             {0,0,1,1,1,0}
     };
 
+    /**
+     * Test data 2
+     */
     public int[][] matrix =
             {       {0, 0, 0, 0, 0, 1},
                     {0, 0, 1, 0, 0, 0},
@@ -25,12 +31,12 @@ public class GraphHelper {
                     {1, 0, 0, 0, 0, 0}};
 
     /**
-     * Convert from an adjacency matrix to adjacency lists
+     * Convert from an adjacency matrix to adjacency table
      * @param graph
      * @return
      * Time complexity: O(n^2)
      */
-    public List[] table2matrix(int[][] graph) {
+    public List<Integer>[] matrix2table(int[][] graph) {
         if (graph == null) return null;
 
         List<Integer>[] v = new List[graph.length];
@@ -46,6 +52,10 @@ public class GraphHelper {
             }
         }
 
+        //print
+        System.out.println("Convert adjacency matrix to adjacency table");
+        print(v);
+
         return v;
     }
 
@@ -53,7 +63,7 @@ public class GraphHelper {
      * Convert from an adjacency list to an incidence matrix
      * @param graph
      * @return
-     * Time complexity: O(m+n)
+     * Time complexity: O(n+2m)
      * n is the number of vertex and m is the number of edges
      */
     public int[][] table2inmatrix(List<Integer>[] graph) {
@@ -66,8 +76,8 @@ public class GraphHelper {
             }
         }
 
-        int m = adjVertex >> 1;
-        int n = graph.length;
+        int m = adjVertex >> 1; //edge
+        int n = graph.length;//vertex
 
         int[][] res = new int[n][m];
         int index = 0;
@@ -87,6 +97,10 @@ public class GraphHelper {
                 }
             }
         }
+
+        //print
+        System.out.println("Convert adjacency table to incidence matrix");
+        print(res);
 
         return res;
     }
@@ -127,6 +141,38 @@ public class GraphHelper {
             }
         }
 
+        //print
+        System.out.println("Convert incidence matrix to adjacency table");
+        print(res);
+
         return res;
+    }
+
+    private static void print(List<Integer>[] res) {
+        for (int i = 0; i < res.length; i++) {
+            List<Integer> line = res[i];
+            StringBuilder sb = new StringBuilder();
+            sb.append("[" + i + "]: ");
+            if (line != null) {
+                for (int val : line) {
+                    sb.append(val + " ");
+                }
+                System.out.println(sb.toString());
+            }
+        }
+    }
+
+    private static void print(int[][] res) {
+        for (int i = 0; i < res.length; i++) {
+            int[] line = res[i];
+            StringBuilder sb = new StringBuilder();
+            sb.append("[" + i + "]: ");
+            if (line != null) {
+                for (int val : line) {
+                    sb.append(val + " ");
+                }
+                System.out.println(sb.toString());
+            }
+        }
     }
 }

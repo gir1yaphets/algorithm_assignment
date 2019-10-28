@@ -32,6 +32,9 @@ public class GraphTraversal {
         init();
     }
 
+    /**
+     * Construct adjacency table according to 5.1
+     */
     public void init() {
         for (int i = 0; i < table1.length; i++) {
             if (table1[i] == null) {

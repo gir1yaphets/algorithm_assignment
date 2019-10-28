@@ -32,12 +32,12 @@ public class HeapSortHelper extends BaseSortingHelper {
         int left = 2 * start + 1;
         int right = 2 * start + 2;
 
-        //left > min
+        //left > max
         if (left < heapSize && isFormerBiggerThanLatter(array[left], array[maxIndex])) {
             maxIndex = left;
         }
 
-        //right > min
+        //right > max
         if (right < heapSize && isFormerBiggerThanLatter(array[right], array[maxIndex])) {
             maxIndex = right;
         }

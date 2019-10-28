@@ -18,10 +18,7 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
-        solution.executeEx1();
-//        solution.executeEx2();
-//        solution.executeEx3();
-//        solution.executeEx4();
+        solution.executeEx2();
     }
 
     private void executeEx1() {
@@ -29,21 +26,19 @@ public class Solution {
         String[] words = FileUtils.parseFile(FILE_PATH_2);
 
         for (int i = LINKED_LIST_SET.value(); i <= HASH_TABLE_SET.value(); i++) {
-            if (i == 1) {
-                BaseSet set = BaseSet.newInstance(BaseSet.SetType.valueOf(i));
-                int size = set.insert(content);
-                int miss = set.query(words);
+            BaseSet set = BaseSet.newInstance(BaseSet.SetType.valueOf(i));
+            int size = set.insert(content);
+            int miss = set.query(words);
 
-                System.out.println("Total size in " + BaseSet.SetType.valueOf(i).name() + " is " + size);
-                System.out.println("Missing number in " + BaseSet.SetType.valueOf(i).name() + " is " + miss + "\n");
-            }
+            System.out.println("Total size in " + BaseSet.SetType.valueOf(i).name() + " is " + size);
+            System.out.println("Missing number in " + BaseSet.SetType.valueOf(i).name() + " is " + miss + "\n");
         }
     }
 
     private void executeEx2() {
         String[] words = FileUtils.parseFile(FILE_PATH_1);
 
-        for (int i = HEAP_SORT.value(); i <= SELECTION_SORT.value(); i++ ) {
+        for (int i = HEAP_SORT.value(); i <= SELECTION_SORT.value(); i++) {
             BaseSortingHelper sortHelper = BaseSortingHelper.newInstance(BaseSortingHelper.SortType.valueOf(i));
 
             //use a new array to sort
@@ -62,7 +57,7 @@ public class Solution {
 
     private void executeEx3() {
         GraphHelper graphHelper = new GraphHelper();
-        List<Integer>[] table = graphHelper.table2matrix(graphHelper.matrix);
+        List<Integer>[] table = graphHelper.matrix2table(graphHelper.ajMatrix);
         int[][] res = graphHelper.table2inmatrix(table);
         List<Integer>[] tableRes = graphHelper.inmatrix2table(res);
     }

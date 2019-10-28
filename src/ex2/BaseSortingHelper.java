@@ -58,13 +58,13 @@ public abstract class BaseSortingHelper {
     }
 
     public boolean isFormerBiggerThanLatter(String former, String latter) {
-        if (former == null || latter == null) throw new IllegalArgumentException("Invalid input");
+        if (former == null || latter == null) return false;
 
         return former.compareTo(latter) > 0;
     }
 
     public boolean isFormerLessThanLatter(String former, String latter) {
-        if (former == null || latter == null) throw new IllegalArgumentException("Invalid input");
+        if (former == null || latter == null) return false;
 
         return former.compareTo(latter) < 0;
     }
