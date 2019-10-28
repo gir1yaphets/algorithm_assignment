@@ -7,10 +7,8 @@ import java.io.Reader;
 
 public class FileUtils {
     private static final String PATTERN = "[a-zA-Z0-9]+";
-    public static final String FILE_PATH_1 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise" +
-            "/pride-and-prejudice.txt";
-    public static final String FILE_PATH_2 = "/Users/pengxiaolve/Documents/02_UCI/Courses/quater_1/241P/exercise" +
-            "/words-shuffled.txt";
+    public static final String FILE_PATH_1 = "./pride-and-prejudice.txt";
+    public static final String FILE_PATH_2 = "./words-shuffled.txt";
 
     public static String readFile(String path) {
         StringBuilder stringBuilder = new StringBuilder();

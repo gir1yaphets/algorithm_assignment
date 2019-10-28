@@ -11,7 +11,7 @@ import de.siegmar.fastcsv.writer.CsvWriter;
 
 public class CsvUtils {
 
-    public static final String EXPORT_CSV_PATH = "/Users/pengxiaolve/Desktop/set.csv";
+    public static final String EXPORT_CSV_PATH = "./set.csv";
 
 
     public static void print(List<List<String >> data) {
